@@ -1,8 +1,14 @@
+
+The Frontend you can find in 
+
+[Frontend](https://github.com/mateussiil/buzz-2023-dev-team-test-frontend)
+
+
 ## Step by step to run the project
 
 Clone Repository
 ```sh
-git clone https://github.dev/mateussiil/buzz-backend.git app-backend
+git clone https://github.com/mateussiil/buzz-2023-dev-team-test-backend.git app-backend
 ```
 
 ```sh
@@ -74,3 +80,5 @@ php artisan test
 
 Acess the project
 [http://localhost:8989](http://localhost:8989)
+
+
