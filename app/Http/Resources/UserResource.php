@@ -17,7 +17,7 @@ class UserResource extends JsonResource
     {
         return [
             'identify' => $this->id,
-            'name' => strtoupper($this->name),
+            'name' => $this->name,
             'email' => $this->email,
             'linkedin_url' => $this->linkedin_url,
             'github_url' => $this->github_url,

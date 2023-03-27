@@ -26,7 +26,7 @@ class UserTest extends TestCase
     $response->assertStatus(201)
         ->assertJson([
             'data' => [
-                'name' => 'JOHN DOE',
+                'name' => 'John Doe',
                 'linkedin_url' => 'https://www.linkedin.com/in/johndoe/',
                 'github_url' => 'https://github.com/johndoe',
             ]
