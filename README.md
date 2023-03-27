@@ -66,5 +66,11 @@ generate migrates
 php artisan migrate
 ```
 
-Acessar o projeto
+run test
+```sh
+php artisan test
+```
+
+
+Acess the project
 [http://localhost:8989](http://localhost:8989)

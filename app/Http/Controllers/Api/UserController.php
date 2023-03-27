@@ -44,13 +44,12 @@ class UserController extends Controller
 
         $existingUser = $this->repository->where('name', '=', $request->name)->first();
 
-        echo $existingUser;
-
         if ($existingUser) {
             return response()->json([
                 'message' => 'User already exist!'
             ], 409);
         }
+
 
         $user = $this->repository->create($request->all());
 
