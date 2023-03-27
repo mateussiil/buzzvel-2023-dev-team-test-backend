@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -23,24 +25,45 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(StoreUpdateUserRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-        $data['password'] = bcrypt($request->password);
+        try {
+            $request->validate([
+                'name' => 'required|unique:users,name',
+                'linkedin_url' => 'required',
+                'github_url' => 'required',
+            ],[
+                'name.required' => 'name is required!',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $e->errors(),
+            ], 422);
+        }
 
-        $user = $this->repository->create($data);
+        $existingUser = $this->repository->where('name', '=', $request->name)->first();
+
+        echo $existingUser;
+
+        if ($existingUser) {
+            return response()->json([
+                'message' => 'User already exist!'
+            ], 409);
+        }
+
+        $user = $this->repository->create($request->all());
 
         return new UserResource($user);
     }
 
-    public function show(string $id)
+    public function show(string $name)
     {
-        // $user = $this->repository->find($id);
-        // $user = $this->repository->where('id', '=', $id)->first();
-        // if (!$user) {
-        //     return response()->json(['message' => 'user not found'], 404);
-        // }
-        $user = $this->repository->findOrFail($id);
+        $user = $this->repository->where('name', '=', $name)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'user not found'], 404);
+        }
 
         return new UserResource($user);
     }
@@ -50,9 +73,6 @@ class UserController extends Controller
         $user = $this->repository->findOrFail($id);
 
         $data = $request->validated();
-
-        if ($request->password)
-            $data['password'] = bcrypt($request->password);
 
         $user->update($data);
 
