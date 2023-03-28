@@ -43,6 +43,10 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 ```
 
+####
+> Depending on the version of docker on your machine, you may need to run 
+> ```sh docker-compose``` instead of  ```docker-compose```
+####
 
 Upload the project containers
 ```sh
@@ -54,6 +58,13 @@ Access the container
 ```sh
 docker-compose exec app bash
 ```
+
+
+
+####
+> If you have problems with permission, execute the  as a super user, run the comand ```su```, and add the password 
+> ```password```
+####
 
 
 Install project dependencies
