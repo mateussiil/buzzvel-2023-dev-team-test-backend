@@ -1,7 +1,7 @@
 
 The Frontend you can find in 
 
-[Frontend](https://github.com/mateussiil/buzz-2023-dev-team-test-frontend)
+[Frontend](https://github.com/mateussiil/buzzvel-2023-dev-team-test-frontend)
 
 
 ## Step by step to run the project
